@@ -8,10 +8,6 @@ spring :
 #    schema: classpath:/schema.sql
     #第一次启动做建表用，之后注释掉
 #    initialization-mode: always
-mybatis :
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 # JWT
 jwt:
   header: Authorization
@@ -23,3 +19,7 @@ jwt:
 jasypt:
   encryptor:
     password: 5AF6814C150D71E4D9A2FA5D26C0F667
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl

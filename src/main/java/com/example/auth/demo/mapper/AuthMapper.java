@@ -1,15 +1,16 @@
 package com.example.auth.demo.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.auth.demo.domain.auth.Role;
 import com.example.auth.demo.domain.auth.UserDetail;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author admin
  */
-@Repository
-public interface AuthMapper {
+@Mapper
+public interface AuthMapper extends BaseMapper {
     /**
      * 根据用户名查找用户
      * @param name
