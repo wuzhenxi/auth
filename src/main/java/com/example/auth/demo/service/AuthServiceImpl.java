@@ -8,6 +8,7 @@ import com.example.auth.demo.domain.auth.UserDetail;
 import com.example.auth.demo.exception.CustomException;
 import com.example.auth.demo.mapper.AuthMapper;
 import com.example.auth.demo.utils.JwtUtils;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,11 +22,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 /**
- * @author: JoeTao
- * createAt: 2018/9/17
+ * @author: admin
  */
 @Service
 public class AuthServiceImpl implements AuthService {

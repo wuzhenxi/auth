@@ -4,8 +4,7 @@ import com.example.auth.demo.domain.auth.ResponseUserToken;
 import com.example.auth.demo.domain.auth.UserDetail;
 
 /**
- * @author: JoeTao
- * createAt: 2018/9/17
+ * @author: admin
  */
 public interface AuthService {
     /**

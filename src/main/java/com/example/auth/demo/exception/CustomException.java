@@ -4,8 +4,8 @@ import com.example.auth.demo.domain.ResultJson;
 import lombok.Getter;
 
 /**
- * @author Joetao
- * Created at 2018/8/24.
+ * 自定义异常
+ * @author admin
  */
 @Getter
 public class CustomException extends RuntimeException{

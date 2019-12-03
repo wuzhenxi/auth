@@ -16,8 +16,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author: JoeTao
- * createAt: 2018/9/14
+ * @author: admin
  */
 @Component
 public class JwtUtils {

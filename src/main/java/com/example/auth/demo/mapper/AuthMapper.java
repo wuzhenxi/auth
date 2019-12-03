@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author JoeTao
- * createAt: 2018/9/17
+ * @author admin
  */
 @Repository
 public interface AuthMapper {

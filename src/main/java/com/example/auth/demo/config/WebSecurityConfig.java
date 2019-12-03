@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,8 +20,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * Author: JoeTao
- * createAt: 2018/9/14
+ * Author: admin
  */
 @Configuration
 @EnableWebSecurity
@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public WebSecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler,
-                             @Qualifier("RestAuthenticationAccessDeniedHandler") AccessDeniedHandler accessDeniedHandler,
-                             @Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
-                             JwtAuthenticationTokenFilter authenticationTokenFilter) {
+            @Qualifier("RestAuthenticationAccessDeniedHandler") AccessDeniedHandler accessDeniedHandler,
+            @Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
+            JwtAuthenticationTokenFilter authenticationTokenFilter) {
         this.unauthorizedHandler = unauthorizedHandler;
         this.accessDeniedHandler = accessDeniedHandler;
         this.CustomUserDetailsService = CustomUserDetailsService;
@@ -57,7 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 装载BCrypt密码编码器
-     * @return
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -77,7 +76,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/api/v1/login", "/api/v1/sign", "/error/**").permitAll()
+                .antMatchers("/api/v1/login", "/api/v1/sign", "/error/**")
+                .permitAll()
+//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
 

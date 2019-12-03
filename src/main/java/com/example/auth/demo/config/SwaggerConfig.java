@@ -13,14 +13,14 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author joetao
+ * @author admin
  * swagger相关配置类
  */
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
 
-    private Contact contact = new Contact("Joetao","localhost:8080/swagger-ui.html", "cutesimba@163.com");
+    private Contact contact = new Contact("wzx","localhost:8080/swagger-ui.html", "wyyxwzx@163.com");
 
     @Bean
     public Docket createRestApi() {

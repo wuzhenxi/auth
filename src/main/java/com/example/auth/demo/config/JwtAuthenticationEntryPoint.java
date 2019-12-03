@@ -13,8 +13,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 
 /**
- * @author: JoeTao
- * createAt: 2018/9/20
+ * @author: admin
  */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {

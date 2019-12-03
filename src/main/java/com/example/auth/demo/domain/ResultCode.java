@@ -1,9 +1,8 @@
 package com.example.auth.demo.domain;
 
 /**
- * @author Joetao
+ * @author admin
  * 状态码
- * Created by jt on 2018/3/8.
  */
 public enum ResultCode {
     /*

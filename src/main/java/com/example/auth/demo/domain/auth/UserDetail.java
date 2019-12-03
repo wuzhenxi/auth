@@ -1,5 +1,6 @@
 package com.example.auth.demo.domain.auth;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author : JoeTao
- * createAt: 2018/9/14
+ * @author : admin
  */
+@Data
 public class UserDetail implements UserDetails {
     private long id;
     private String username;
@@ -100,28 +101,4 @@ public class UserDetail implements UserDetails {
         return lastPasswordResetDate;
     }
 
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }
 }

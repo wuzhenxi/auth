@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @author: JoeTao
- * createAt: 2018/9/21
+ * @author: admin
  */
 @Component("RestAuthenticationAccessDeniedHandler")
 public class RestAuthenticationAccessDeniedHandler implements AccessDeniedHandler {
