@@ -2,6 +2,7 @@ package com.example.auth.demo.config;
 
 import com.example.auth.demo.domain.ResultCode;
 import com.example.auth.demo.domain.ResultJson;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import java.io.Serializable;
  * @author: admin
  */
 @Component
+@Slf4j
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 
     private static final long serialVersionUID = -8970718410437077606L;
@@ -25,7 +27,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
                          HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
         //验证为未登陆状态会进入此方法，认证错误
-        System.out.println("认证失败：" + authException.getMessage());
+        log.error("认证失败：{}",authException.getMessage());
         response.setStatus(200);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");
