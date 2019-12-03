@@ -9,7 +9,8 @@ spring :
     #第一次启动做建表用，之后注释掉
 #    initialization-mode: always
 mybatis :
-  config-location : classpath:/mybatis-config.xml
+  config-location : classpath:mapper/*/*.xml
+
 # JWT
 jwt:
   header: Authorization
