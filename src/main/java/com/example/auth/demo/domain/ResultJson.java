@@ -1,14 +1,17 @@
 package com.example.auth.demo.domain;
 
-import lombok.Data;
-
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
 
 /**
  * @author admin
  * RESTful API 返回类型
  */
 @Data
+@ToString
+@AllArgsConstructor
 public class ResultJson<T> implements Serializable{
 
     private static final long serialVersionUID = 783015033603078674L;
@@ -32,10 +35,6 @@ public class ResultJson<T> implements Serializable{
         return new ResultJson(code, o);
     }
 
-    public ResultJson (ResultCode resultCode) {
-        setResultCode(resultCode);
-    }
-
     public ResultJson (ResultCode resultCode,T data) {
         setResultCode(resultCode);
         this.data = data;
@@ -46,12 +45,4 @@ public class ResultJson<T> implements Serializable{
         this.msg = resultCode.getMsg();
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "\"code\":" + code +
-                ", \"msg\":\"" + msg + '\"' +
-                ", \"data\":\"" + data + '\"'+
-                '}';
-    }
 }
