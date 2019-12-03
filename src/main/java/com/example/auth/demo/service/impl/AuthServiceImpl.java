@@ -1,4 +1,4 @@
-package com.example.auth.demo.service;
+package com.example.auth.demo.service.impl;
 
 import com.example.auth.demo.domain.ResultCode;
 import com.example.auth.demo.domain.ResultJson;
@@ -7,6 +7,7 @@ import com.example.auth.demo.domain.auth.Role;
 import com.example.auth.demo.domain.auth.UserDetail;
 import com.example.auth.demo.exception.CustomException;
 import com.example.auth.demo.mapper.AuthMapper;
+import com.example.auth.demo.service.AuthService;
 import com.example.auth.demo.utils.JwtUtils;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;

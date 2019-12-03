@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 /**
  * Author: admin
@@ -31,18 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AccessDeniedHandler accessDeniedHandler;
 
-    private final UserDetailsService CustomUserDetailsService;
+    private final UserDetailsService customUserDetailsService;
 
     private final JwtAuthenticationTokenFilter authenticationTokenFilter;
 
     @Autowired
     public WebSecurityConfig(JwtAuthenticationEntryPoint unauthorizedHandler,
             @Qualifier("RestAuthenticationAccessDeniedHandler") AccessDeniedHandler accessDeniedHandler,
-            @Qualifier("CustomUserDetailsService") UserDetailsService CustomUserDetailsService,
+            @Qualifier("CustomUserDetailsService") UserDetailsService customUserDetailsService,
             JwtAuthenticationTokenFilter authenticationTokenFilter) {
         this.unauthorizedHandler = unauthorizedHandler;
         this.accessDeniedHandler = accessDeniedHandler;
-        this.CustomUserDetailsService = CustomUserDetailsService;
+        this.customUserDetailsService = customUserDetailsService;
         this.authenticationTokenFilter = authenticationTokenFilter;
     }
 
@@ -50,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
                 // 设置UserDetailsService
-                .userDetailsService(this.CustomUserDetailsService)
+                .userDetailsService(this.customUserDetailsService)
                 // 使用BCrypt进行密码的hash
                 .passwordEncoder(passwordEncoder());
     }
@@ -78,7 +79,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 对于获取token的rest api要允许匿名访问
                 .antMatchers("/api/v1/login", "/api/v1/sign", "/error/**")
                 .permitAll()
-//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/v1/**")
+                .hasRole("ADMIN")
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
 
@@ -86,27 +89,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
 
         // 添加JWT filter
-        httpSecurity
-                .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web
-                .ignoring()
-                .antMatchers(
-                        "swagger-ui.html",
-                        "**/swagger-ui.html",
-                        "/favicon.ico",
-                        "/**/*.css",
-                        "/**/*.js",
-                        "/**/*.png",
-                        "/**/*.gif",
-                        "/swagger-resources/**",
-                        "/v2/**",
-                        "/**/*.ttf"
-                );
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(
+                "swagger-ui.html",
+                "**/swagger-ui.html",
+                "/favicon.ico",
+                "/**/*.css",
+                "/**/*.js",
+                "/**/*.png",
+                "/**/*.gif",
+                "/swagger-resources/**",
+                "/v2/**",
+                "/**/*.ttf"
+        );
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
                 "/swagger-resources/configuration/ui",
                 "/swagger-resources",
                 "/swagger-resources/configuration/security",
@@ -119,4 +120,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
 }
