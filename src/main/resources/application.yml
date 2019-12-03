@@ -10,6 +10,8 @@ spring :
 #    initialization-mode: always
 mybatis :
   config-location : classpath:mapper/*/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # JWT
 jwt:
